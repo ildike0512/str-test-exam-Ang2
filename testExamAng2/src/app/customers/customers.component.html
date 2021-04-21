@@ -1,0 +1,44 @@
+<div class="row">
+    <div class="col-12 mt-2">
+      <div class="row">
+        <button [routerLink]="['customers/' + 0]" class="col-12 my-5 btn btn-warning"><i class="fa fa-plus"></i>
+        Add new</button>
+      </div>
+      <!-- <div class="row mb-3">
+        <h4 class="mr-3">Search by name</h4>
+        <div class="form-group">
+          <input type="text" [(ngModel)]="phrase" class="form-control" placeholder="Search">
+        </div>
+      </div> -->
+  
+      <h2>Customers List</h2>
+      <table class="table table-striped">
+        <thead>
+         <!--  <tr>
+            <th class="sortedHeads" *ngFor="let col of cols" (click)="onChangeSort(col)">{{col}}</th>
+            <th></th>
+          </tr> -->
+        </thead>
+        <tbody>
+          <tr *ngFor="let customers of customers$ | async">
+            <td>{{ customers.id }}</td>
+            <td>{{ customers.name }}</td>
+            <td>{{ customers.email }}</td>
+            <td>{{ customers.rating }}</td>
+            <td>{{ customers.address }}</td>
+            
+            <td>
+              <div class="btn-group">
+               <!--  <button [routerLink]="['customers/' + customers.id]" class="btn btn-info">
+                  <i class="fa fa-pencil"></i>
+                </button> -->
+                <button (click)="onDelete(customers)" class="btn btn-danger">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

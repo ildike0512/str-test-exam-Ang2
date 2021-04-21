@@ -1,0 +1,51 @@
+<div class="row">
+    <div *ngIf="customers$ | async as customers" class="col-6 offset-3 mt-3">
+      <h2>Update / Create customers</h2>
+      <form #customersForm="ngForm" (ngSubmit)="onUpdate(customersForm, customers)">
+        <!-- <input name="id" type="hidden" [(ngModel)]="customers.id"> -->
+        <div class="form-group">
+          <label>Name </label>
+          <!-- Validation: min 8 char, max 40 char, required -->
+          <input class="form-control" type="text" name="name" [(ngModel)]="customers.name" pattern=".{8,40}" required>
+          <div [hidden]="customersForm.controls.name?.valid || customersForm.controls.name?.pristine" class="error-feedback">
+            The name must be min 8 and max 40 characters long!
+          </div>
+        </div>
+        <div class="form-group">
+            <label>Email </label>
+            <!-- Validation: min 8 char, max 40 char, required -->
+            <input class="form-control" type="text" name="email" [(ngModel)]="customers.email" pattern=".{8,40}" required>
+            <div [hidden]="customersForm.controls.email?.valid || customersForm.controls.email?.pristine" class="error-feedback">
+              The email must be min 8 and max 40 characters long!
+            </div>
+          </div>
+        <div class="form-group">
+          <label>Rating </label>
+          <input class="form-control" type="number" name="rating" [(ngModel)]="customers.rating"
+            pattern="[0-9]" required>
+          <div [hidden]="customersForm.controls.rating?.valid || customersForm.controls.rating?.pristine" class="error-feedback">
+            The Rating must be a only number format!
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Address </label>
+          <!-- Validation: min 8 char, max 100 char, required -->
+          <input class="form-control" type="text" name="address" [(ngModel)]="customers.address" pattern=".{8,100}" required>
+          <div [hidden]="customersForm.controls.address?.valid || customersForm.controls.address?.pristine" class="error-feedback">
+            The address must be min 8 and max 100 characters long!
+          </div>
+        </div>
+       
+        <button *ngIf="customers.id == 0" [disabled]="customersForm.invalid || submitted" type="submit"
+          class="btn btn-success btn-block mt-5">
+          <i *ngIf="!submitted" class="fa fa-save"></i>
+          <i *ngIf="submitted" class="fa fa-refresh"></i>
+        </button>
+        <button *ngIf="customers.id != 0" [disabled]="customersForm.invalid || submitted" type="submit"
+          class="btn btn-primary btn-block mt-5">
+          <i *ngIf="!submitted" class="fa fa-save"></i>
+          <i *ngIf="submitted" class="fa fa-refresh"></i>
+        </button>
+      </form>
+    </div>  
+  </div>
